@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "commonjs",
+        "rootDir": "./src",
+        "outDir": "./build",
+        "esModuleInterop": true,
+        "strict": true,
+        "declaration": true,
+        "typeRoots": ["./src", "node_modules/@types"], // Include your src directory for custom types
+        "types": ["node", "express"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "build"]
+}
