@@ -12,7 +12,7 @@
         "url": "git+https://github.com/abinash-thakur/advance-rate-limiter.git"
     },
     "author": "abinash thakur",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/abinash-thakur/advance-rate-limiter/issues"
     },
