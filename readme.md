@@ -1,7 +1,7 @@
 # advance-rate-limiter(using sliding widow counter algorithm)
 
 ![npm](https://img.shields.io/npm/v/advance-rate-limiter)
-![license](https://img.shields.io/npm/l/advance-rate-limiter)
+![license](https://img.shields.io/badge/license-MIT-green)
 ![npm](https://img.shields.io/npm/v/rate-limiter)
 ![npm](https://img.shields.io/npm/dw/rate-limiter)
 
