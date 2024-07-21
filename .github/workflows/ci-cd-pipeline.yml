@@ -1,64 +1,64 @@
 name: CI/CD Pipeline
 
 on:
-  push:
-    branches:
-      - development
+    push:
+        branches:
+            - development
 
 jobs:
-  merge-and-publish:
-    runs-on: ubuntu-latest
+    merge-and-publish:
+        runs-on: ubuntu-latest
 
-    steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          ref: development
+        steps:
+            # Checkout the repository
+            - name: Checkout repository
+              uses: actions/checkout@v2
+              with:
+                  ref: development
 
-      # Setup Node.js environment
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.10.0'
+            # Setup Node.js environment
+            - name: Setup Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '20'
 
-      # Configure Git
-      - name: Configure Git
-        run: |
-          git config --global user.name 'abinash'
-          git config --global user.email 'thakurabinash299@gmail.com'
+            # Configure Git
+            - name: Configure Git
+              run: |
+                  git config --global user.name 'github-actions'
+                  git config --global user.email 'github-actions@github.com'
 
-      # Authenticate with GitHub using PAT
-      - name: Authenticate with GitHub
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          git remote set-url origin https://github-actions:${GH_PAT}@github.com/${{ github.repository }}.git
+            # Authenticate with GitHub using default token
+            - name: Authenticate with GitHub
+              run: |
+                  git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-      # Ensure main branch exists
-      - name: Ensure main branch exists
-        run: |
-          if git show-ref --verify --quiet refs/heads/main; then
-            echo "Branch 'main' exists."
-          else
-            echo "Branch 'main' does not exist. Creating 'main' branch."
-            git checkout -b main
-            git push origin main
-          fi
+            # Ensure main branch exists
+            - name: Ensure main branch exists
+              run: |
+                  git fetch origin
+                  if git show-ref --verify --quiet refs/heads/main; then
+                    echo "Branch 'main' exists."
+                  else
+                    echo "Branch 'main' does not exist. Creating 'main' branch."
+                    git checkout -b main
+                    git push origin main
+                  fi
 
-      # Merge development into main
-      - name: Merge development into main
-        run: |
-          git checkout main
-          git merge development
-          git push origin main
+            # Merge development into main
+            - name: Merge development into main
+              run: |
+                  git fetch origin
+                  git checkout main
+                  git merge development
+                  git push origin main
 
-      # Publish to npm
-      - name: Publish to npm
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: |
-          npm install
-          npm run build
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            # Publish to npm
+            - name: Publish to npm
+              if: ${{ github.ref == 'refs/heads/main' }}
+              run: |
+                  npm install
+                  npm run build
+                  npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
