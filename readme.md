@@ -12,4 +12,4 @@ A customizable rate limiter middleware for Express.js applications using Redis. 
 To install the package, run:
 
 ```sh
-npm install advance-advance-rate-limiter
+npm install advance-rate-limiter
