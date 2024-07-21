@@ -20,17 +20,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20.10.0'
+          node-version: '14'
 
       # Configure Git
       - name: Configure Git
         run: |
           git config --global user.name 'abinash'
           git config --global user.email 'thakurabinash299@gmail.com'
-
-      # Output repository information
-      - name: Show repository info
-        run: echo "Repository: ${{ github.repository }}"
 
       # Authenticate with GitHub using PAT
       - name: Authenticate with GitHub
@@ -59,7 +55,7 @@ jobs:
 
       # Publish to npm
       - name: Publish to npm
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           npm install
           npm run build
