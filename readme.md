@@ -1,4 +1,4 @@
-`advance-rate-limiter`
+## advance-rate-limiter(using the sliding window counter algorithm)
 
 ![npm](https://img.shields.io/npm/v/advance-rate-limiter)
 ![license](https://img.shields.io/badge/license-MIT-green)
