@@ -42,8 +42,6 @@ jobs:
             echo "Branch 'main' exists."
           else
             echo "Branch 'main' does not exist. Creating 'main' branch."
-            git checkout -b main
-            git push origin main
           fi
 
       # Merge development into main
