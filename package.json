@@ -1,16 +1,25 @@
 {
     "name": "advance-rate-limiter",
     "version": "1.0.0",
-    "description": "contain all the code of ARL",
+    "description": "A customizable rate limiter middleware for Express.js applications using Redis and sliding window algorithm.",
     "main": "build/index.js",
     "types": "build/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "test": "jest"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/abinash-thakur/advance-rate-limiter.git"
     },
+    "keywords": [
+        "rate limiter",
+        "express",
+        "middleware",
+        "redis",
+        "sliding window",
+        "API rate limiting"
+    ],
     "author": "abinash thakur",
     "license": "MIT",
     "bugs": {
