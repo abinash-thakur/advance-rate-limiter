@@ -1,4 +1,5 @@
-`advance-rate-limiter`
+## advance-rate-limiter
+- **sliding window counter algorithm is used**
 
 ![npm](https://img.shields.io/npm/v/advance-rate-limiter)
 ![license](https://img.shields.io/badge/license-MIT-green)
@@ -9,10 +10,10 @@
 
 ## 🚀 Features
 
--   \*\*Dynamic Rate Limiting: Configure rate limits for different endpoints using a JSON configuration file.
--   \*\*Sliding Window Algorithm: Implement precise rate limiting with the sliding window approach.
--   \*\*Redis Integration: Utilize Redis for efficient request tracking and storage.
--   \*\*Flexible Setup: Easily configure Redis and apply rate limiting in your Express app.
+-   **Dynamic Rate Limiting:** Configure rate limits for different endpoints using a JSON configuration file.
+-   **Sliding Window Algorithm:** Implement precise rate limiting with the sliding window approach.
+-   **Redis Integration:** Utilize Redis for efficient request tracking and storage.
+-   **Flexible Setup:** Easily configure Redis and apply rate limiting in your Express app.
 
 ## 📦 Installation
 
