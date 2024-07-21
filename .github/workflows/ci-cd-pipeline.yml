@@ -28,6 +28,13 @@ jobs:
                   git config --global user.name 'abinash'
                   git config --global user.email 'thakurabinash299@gmail.com'
 
+            # Authenticate with GitHub using PAT
+            - name: Authenticate with GitHub
+              env:
+                  GH_PAT: ${{ secrets.GH_PAT }}
+              run: |
+                  git remote set-url origin https://github-actions:${GH_PAT}@github.com/${{ github.repository }}.git
+
             # Merge development into main
             - name: Merge development into main
               run: |
