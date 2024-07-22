@@ -41,7 +41,7 @@ jobs:
             - name: Checkout main branch
               run: git checkout main
 
-            # Create or checkout main branch
+            # Checkout main branch
             - name: Create or checkout main branch
               run: |
                 if git show-ref --quiet refs/heads/main; then
@@ -50,9 +50,24 @@ jobs:
 
             # Merge development into main
             - name: Merge development into main
+              id: merge
               run: |
-                  git merge development --allow-unrelated-histories
-                  git push origin main
+                git merge development --allow-unrelated-histories || true
+
+            # Check for merge conflicts
+            - name: Check for merge conflicts
+              run: |
+               if git ls-files -u | grep -q '^'; then
+                 echo "::error::Merge conflict detected. Please resolve the conflict manually."
+               exit 1
+               fi
+
+            # Push the merge commit
+            - name: Push the merge commit
+              if: success()
+              run: |
+                git commit -m "Merge branch 'development' into 'main'"
+                git push origin main
 
             # Publish to npm
             - name: Publish to npm
