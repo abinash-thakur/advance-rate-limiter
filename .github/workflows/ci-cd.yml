@@ -37,6 +37,10 @@ jobs:
             - name: Fetch all branches
               run: git fetch --all
 
+            # Checkout main branch
+            - name: Checkout main branch
+              run: git checkout main
+
             # Create or checkout main branch
             - name: Create or checkout main branch
               run: |
