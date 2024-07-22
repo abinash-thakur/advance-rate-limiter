@@ -11,8 +11,9 @@ export default function rateLimiter(rateLimits: RateLimitOption) {
             const route = req.originalUrl.split('?')[0]; // Get the API endpoint
             const rateLimitConfig = rateLimits[route];
 
+            // If no rate limit is set for the route, skip the rate limiter
             if (!rateLimitConfig) {
-                return next(); // If no rate limit is set for the route, skip the rate limiter
+                return next();
             }
 
             const { limit, windowTime } = rateLimitConfig;
@@ -30,9 +31,9 @@ export default function rateLimiter(rateLimits: RateLimitOption) {
             // Use a MULTI transaction
             const multi = client.multi();
 
-            multi.incr(keys[0]); // Increment the current window's count
-            multi.expire(keys[0], 2 * windowTime); // Set expiration for cleanup
-            multi.get(keys[0]); // Get current window's count
+            multi.incr(keys[0]);
+            multi.expire(keys[0], 2 * windowTime);
+            multi.get(keys[0]);
             multi.get(keys[1]);
 
             const rateLimitData = await multi.exec();
