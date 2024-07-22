@@ -36,9 +36,8 @@ jobs:
             # Merge development into main
             - name: Merge development into main
               run: |
-                  git fetch origin
                   git checkout main
-                  git merge origin/development --allow-unrelated-histories
+                  git merge ${{github.event.input.branch}}
                   git push origin main
 
             # Publish to npm
