@@ -51,7 +51,7 @@ jobs:
             # Merge development into main
             - name: Merge development into main
               run: |
-                  git merge development
+                  git merge development --allow-unrelated-histories
                   git push origin main
 
             # Publish to npm
