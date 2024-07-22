@@ -33,18 +33,6 @@ jobs:
               run: |
                   git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-            # Ensure main branch exists
-            - name: Ensure main branch exists
-              run: |
-                  git fetch origin
-                  if git show-ref --verify --quiet refs/heads/main; then
-                    echo "Branch 'main' exists."
-                  else
-                    echo "Branch 'main' does not exist. Creating 'main' branch."
-                    git checkout -b main
-                    git push origin main
-                  fi
-
             # Merge development into main
             - name: Merge development into main
               run: |
