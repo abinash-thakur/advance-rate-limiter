@@ -1,7 +1,7 @@
 import { NextFunction } from "express";
 import { AccessForbiddenError, InternalServerError } from "../errors";
 import { getRedisClient } from "../../config/redisClient";
-import { RateLimitConfig } from "../interface/ratelimit.interface";
+import { RateLimitConfig } from "../../middleware/slidingWindow/interface/ratelimit.interface";
 import { RATE_LIMIT_TYPE } from "../enums/rate-limit-types.enum";
 
 export default async function slidingWindow(next : NextFunction, rateLimitConfig : RateLimitConfig, rateLimitKey : string, route : string){
