@@ -1,8 +1,8 @@
-import slidingWindow from '../../utils/helper/sliding-window';
-import RateLimitOption from '../../utils/interface/ratelimitOption.interface';
+import slidingWindow from '../../../utils/helper/sliding-window';
+import RateLimitOption from '../interface/ratelimitOption.interface';
 import { Request, Response, NextFunction } from 'express';
-import rateLimitConfigSchema from './rate-limiter.validator';
-import { NotAcceptableError } from '../../utils/errors/api-errors/NotAcceptableError';
+import rateLimitConfigSchema from '../validator/rate-limiter.validator';
+import { NotAcceptableError } from '../../../utils/errors/api-errors/NotAcceptableError';
 
 export default function rateLimiter(rateLimits: RateLimitOption) {
     return async (req: Request, _res: Response, next: NextFunction) => {
