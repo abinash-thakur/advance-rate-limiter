@@ -2,6 +2,7 @@ import { NextFunction } from "express";
 import { AccessForbiddenError, InternalServerError } from "../errors";
 import { getRedisClient } from "../../config/redisClient";
 import { RateLimitConfig } from "../interface/ratelimit.interface";
+import { RATE_LIMIT_TYPE } from "../enums/rate-limit-types.enum";
 
 export default async function slidingWindow(next : NextFunction, rateLimitConfig : RateLimitConfig, rateLimitKey : string, route : string){
     try{
@@ -13,8 +14,8 @@ export default async function slidingWindow(next : NextFunction, rateLimitConfig
         const previousWindowStart = currentWindowStart - windowTime;
 
         const keys = [
-            `rateLimiterCurrent:${rateLimitKey}:${route}:${currentWindowStart}`,
-            `rateLimiterPrevious:${rateLimitKey}:${route}:${previousWindowStart}`,
+            `${RATE_LIMIT_TYPE.RATE_LIMIT_CURRENT}:${rateLimitKey}:${route}:${currentWindowStart}`,
+            `${RATE_LIMIT_TYPE.RATE_LIMIT_PREVIOUS}:${rateLimitKey}:${route}:${previousWindowStart}`,
         ];
 
         // Use a MULTI transaction
