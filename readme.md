@@ -131,16 +131,9 @@ This project is licensed under the MIT License.
 
 ## functions
 
-| function | configuration | remark |
-|----------|---------------|--------|
-| setupRedisClient |{
-    host: 'your-redis-host',
-    port: 'your-redis-port',
-    password: 'your-redis-password', // Optional: Include if your Redis instance requires authentication
-}  | setup the redis connection |
-| rateLimiter | {
-    "/api/endpoint1": { "limit": 2, "windowTime": 60 }, // 2 requests per minute
-    "/api/endpoint2": { "limit": 5, "windowTime": 120 } // 5 requests per 2 minutes
-} | 1. /api/endpoint1: Allows a maximum of 2 requests per minute (60 seconds).
-    2. /api/endpoint2: Allows a maximum of 5 requests per 2 minutes (120 seconds).
-    These rate limits help prevent abuse by limiting the number of requests that can be made to each endpoint within a specified time window. |
+## Configuration Details
+
+| Function         | Configuration                                                                                                                                                    | Remark                                                                                                                                                           |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `setupRedisClient` | ```{ host: 'your-redis-host', port: 'your-redis-port', password: 'your-redis-password' }``` | Sets up the Redis connection. Include the `password` field if your Redis instance requires authentication.                                                      |
+| `rateLimiter`      | ```{ "/api/endpoint1": { "limit": 2, "windowTime": 60 }, "/api/endpoint2": { "limit": 5, "windowTime": 120 } }```           | 1. **/api/endpoint1**: Allows a maximum of 2 requests per minute (60 seconds). <br> 2. **/api/endpoint2**: Allows a maximum of 5 requests per 2 minutes (120 seconds). <br> These rate limits help prevent abuse by limiting the number of requests that can be made to each endpoint within a specified time window. |
