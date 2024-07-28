@@ -37,7 +37,7 @@ import { setupRedisClient } from 'advance-rate-limiter';
 // Configuration object for Redis
 const redisConfig = {
     host: 'your-redis-host',
-    port: 6379, // Default Redis port
+    port: 'your-redis-port',
     password: 'your-redis-password', // Optional: Include if your Redis instance requires authentication
 };
 
@@ -73,7 +73,7 @@ const rateLimitConfig = JSON.parse(fs.readFileSync(rateLimitConfigPath, 'utf8'))
 // Initialize Redis client
 const redisConfig = {
     host: 'your-redis-host',
-    port: 6379,
+    port: 'your-redis-port',
     password: 'your-redis-password',
 };
 
@@ -127,3 +127,20 @@ npm test
 ## 📜 License
 
 This project is licensed under the MIT License.
+
+
+## functions
+
+| function | configuration | remark |
+|----------|---------------|--------|
+| setupRedisClient |{
+    host: 'your-redis-host',
+    port: 'your-redis-port',
+    password: 'your-redis-password', // Optional: Include if your Redis instance requires authentication
+}  | setup the redis connection |
+| rateLimiter | {
+    "/api/endpoint1": { "limit": 2, "windowTime": 60 }, // 2 requests per minute
+    "/api/endpoint2": { "limit": 5, "windowTime": 120 } // 5 requests per 2 minutes
+} | 1. /api/endpoint1: Allows a maximum of 2 requests per minute (60 seconds).
+    2. /api/endpoint2: Allows a maximum of 5 requests per 2 minutes (120 seconds).
+    These rate limits help prevent abuse by limiting the number of requests that can be made to each endpoint within a specified time window. |
