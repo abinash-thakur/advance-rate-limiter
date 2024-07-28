@@ -1,6 +1,6 @@
 {
     "name": "advance-rate-limiter",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "A customizable rate limiter middleware for Express.js applications using Redis and sliding window algorithm.",
     "main": "build/index.js",
     "types": "build/index.d.ts",
@@ -33,6 +33,7 @@
         "typescript": "^5.5.3"
     },
     "dependencies": {
+        "joi": "^17.13.3",
         "redis": "^4.6.15"
     }
 }
