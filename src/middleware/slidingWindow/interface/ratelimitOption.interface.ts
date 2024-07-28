@@ -1,4 +1,4 @@
-import { RateLimitConfig } from '../../middleware/slidingWindow/interface/ratelimit.interface';
+import { RateLimitConfig } from './ratelimit.interface';
 
 export default interface RateLimitOption {
     [key: string]: RateLimitConfig;
