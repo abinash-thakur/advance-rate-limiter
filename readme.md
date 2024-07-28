@@ -116,9 +116,9 @@ console.log("this is rate-limit- config", globalRateLimitConfig);
 
 // Initialize Redis client
 const redisConfig = {
-    host: 'redis-13901.c264.ap-south-1-1.ec2.redns.redis-cloud.com',
-    port: 13901,
-    password: "dA303vbvYHKSAMowd6DukywBPIFfOJa6"
+    host: 'your-redis-host',
+    port: 'your-redis-port',
+    password: 'your-redis-password',
 };
 
 setupRedisClient(redisConfig);
