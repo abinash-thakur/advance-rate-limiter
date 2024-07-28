@@ -47,15 +47,22 @@ setupRedisClient(redisConfig);
 
 2. Configure Rate Limits
    Create a rateLimitConfig.json file in your project’s root directory. Define your rate limits for different endpoints as follows:
-
+**for `rateLimiter` method**
 ```json
 {
     "/api/endpoint1": { "limit": 2, "windowTime": 60 }, // 2 requests per minute
     "/api/endpoint2": { "limit": 5, "windowTime": 120 } // 5 requests per 2 minutes
 }
 ```
+**for `globalRateLimiter` method**
+```json
+{
+    "limit": 10, // allow 10 request
+    "windowTime" : 60 // time limit is 1 minutes
+}
+```
 
-3. Apply Middleware
+3. Apply Middleware for rateLimiter
    Use the rateLimiter middleware in your Express application by passing the rate limit configuration loaded from the JSON file.
 
 ```typescript
@@ -81,6 +88,43 @@ setupRedisClient(redisConfig);
 
 // Apply rate limiter middleware
 app.use(rateLimiter(rateLimitConfig));
+
+app.get('/api/endpoint1', (req, res) => {
+    res.send('API endpoint 1 is working');
+});
+
+app.get('/api/endpoint2', (req, res) => {
+    res.send('API endpoint 2 is working');
+});
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
+```
+4. Apply middleware for globalRateLimiter
+
+```typescript
+import express from 'express';
+import { setupRedisClient, globalRateLimiter } from 'advance-rate-limiter';
+import globalRateLimitConfig from './globalRateLimitConfig.json' assert {type : 'json'};
+
+
+const app = express();
+
+
+console.log("this is rate-limit- config", globalRateLimitConfig);
+
+// Initialize Redis client
+const redisConfig = {
+    host: 'redis-13901.c264.ap-south-1-1.ec2.redns.redis-cloud.com',
+    port: 13901,
+    password: "dA303vbvYHKSAMowd6DukywBPIFfOJa6"
+};
+
+setupRedisClient(redisConfig);
+
+// Apply rate limiter middleware
+app.use(globalRateLimiter(globalRateLimitConfig));
 
 app.get('/api/endpoint1', (req, res) => {
     res.send('API endpoint 1 is working');
